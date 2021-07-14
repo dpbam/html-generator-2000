@@ -1,0 +1,25 @@
+{
+  "name": "html-generator-2000",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dpbam/html-generator-2000.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dpbam/html-generator-2000/issues"
+  },
+  "homepage": "https://github.com/dpbam/html-generator-2000#readme",
+  "devDependencies": {
+    "jest": "^27.0.6"
+  }
+}
