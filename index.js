@@ -224,12 +224,3 @@ managerPrompts()
     })
    
 
-// or should I do something like this where questions is a const variable established as the array of questions?
-// function init(questions) {
-//     console.log("Welcome to the Team Profile Generator!\nPlease answer some questions so we can get started.")
-//     inquirer.prompt(questions)
-    
-
-    
-// }
-
