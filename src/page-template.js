@@ -1,3 +1,9 @@
+listHtml = '';
+
+for(let i=0; i<=templateData.length; i++) {
+    listHtml += `<h1>templateData[i].name<\h1>`
+}
+
 module.exports = templateData => {
     console.log(templateData);
   
@@ -13,7 +19,7 @@ module.exports = templateData => {
     </head>
   
     <body>
-      <h1>${templateData.name}</h1>
+      <h1>${listHtml}</h1>
       <h2><a href="https://github.com/${templateData.github}">Github</a></h2>
     </body>
     </html>

@@ -87,7 +87,7 @@ const addEmployee = () => {
 
     return inquirer.prompt ([
         {   
-            type: "checkbox",
+            type: "list",
             name: 'role',
             message: "Pick the role the employee has:",
             choices: ['Engineer', "Intern"]
@@ -171,7 +171,7 @@ const addEmployee = () => {
 
     .then(employeeData => {
 
-        let { name, id, role, github, school, confirmAddMoreEmployee } = employeeData;
+        let { name, id, email, role, github, school, confirmAddMoreEmployee } = employeeData;
         let employee;
 
         if (role === "Engineer") {
@@ -183,7 +183,7 @@ const addEmployee = () => {
         questionsArray.push(employee);
 
         if (confirmAddMoreEmployee) {
-            return addEmployee(questionsArray);
+            return addEmployee();
         } else {
             return questionsArray;
         }
