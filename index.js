@@ -3,6 +3,10 @@ const { writeFile } = require("../html-generator-2000/utils/generate-site");
 const fs = require('fs');
 const generatePage = require('./src/page-template');
 
+const Manager = require('./lib/Manager');
+const Engineer = require('./lib/Engineer');
+const Intern = require('./lib/Intern'); 
+
 const questionsArray = [];
 
 const managerPrompts = () => {
@@ -23,12 +27,12 @@ const managerPrompts = () => {
         {
             type: 'input',
             name: 'id',
-            message: "What is this manager's id number?",
+            message: "What is this manager's ID#?",
             validate: managerId => {
                 if (managerId) {
                     return true;
                 } else {
-                    console.log("Please provide the manager's id number.")
+                    console.log("Please provide the manager's ID#.")
                     return false;
                 }
             }  
@@ -36,7 +40,7 @@ const managerPrompts = () => {
         {
             type: 'input',
             name: 'email',
-            message: "Enter your manager's email address.",
+            message: "Enter the manager's email address.",
             validate: managerEmail => {
                 if (managerEmail) {
                     return true;
@@ -59,34 +63,6 @@ const managerPrompts = () => {
                 }
             }
         },
-        
-        {
-            type: 'input',
-            name: 'email',
-            message: "Enter your employee's email address.",
-            validate: employeeEmail => {
-                if (employeeEmail) {
-                    return true;
-                } else {
-                    console.log("Just put their email address. Sigh...")
-                    return false;
-                }
-            }
-        },
-        {
-            type: 'input',
-            name: 'officeNumber',
-            message: "Enter your employee's office number.",
-            when: (answers) => answers.role === 'Manager', 
-            validate: officeNumber => {
-                if (officeNumber) {
-                    return true;
-                } else {
-                    console.log("Oops. You forgot to put their office number. Try again.")
-                    return false;
-                }
-            }
-        },
     ])
     .then(managerData => {
         const { name, id, email, officeNumber } = managerData;
@@ -100,7 +76,7 @@ const managerPrompts = () => {
 const addEmployee = () => {
     console.log(`
     =================
-    Now we'll add employees to the team
+    Now let's add employees to the team
     =================
     `);
 
@@ -109,7 +85,7 @@ const addEmployee = () => {
     //     portfolioData.projects = [];
     //     }
 
-    return inquirer.prompt([
+    return inquirer.prompt ([
         {   
             type: "checkbox",
             name: 'role',
@@ -161,7 +137,7 @@ const addEmployee = () => {
             type: 'input',
             name: 'github',
             message: "What's the employee's GitHub username?",
-            when: (answers) => answers.role === 'Engineer',
+            when: (input) => input.role === 'Engineer',
             validate: employeeGithub => {
                 if(employeeGithub) {
                     return true;
@@ -175,7 +151,7 @@ const addEmployee = () => {
             type: 'input',
             name: 'school',
             message: "What school does the intern go to?",
-            when: (answers) => answers.role === 'Intern',
+            when: (input) => input.role === 'Intern',
             validate: employeeSchool => {
                 if(employeeSchool) {
                     return true;
@@ -199,33 +175,61 @@ const addEmployee = () => {
         let employee;
 
         if (role === "Engineer") {
+            employee = new Engineer (name, id, email, github);
+        } else if (role === 'Intern') {
+            employee = new Intern (name, id, email, school);
+        }
 
+        questionsArray.push(employee);
+
+        if (confirmAddMoreEmployee) {
+            return addEmployee(questionsArray);
+        } else {
+            return questionsArray;
         }
     })
+};
 
-    promptUser()
-        .then(pageHTML => {
-            return writeFile(pageHTML);
-        })
-        .then(writeFileResponse => {
-            console.log(writeFileResponse);
-            return copyFile();
-        })
-        .then(copyFileResponse => {
-            console.log(copyFileResponse);
-        })
-        .catch(err => {
+// generates HTML page file
+
+const writeToFile = data => {
+    fs.writeFile('./dist/index.html', data, err => {
+        if (err) {
             console.log(err);
-        })
+            return; 
+        } else {
+            console.log("Your team profile's been created. Check it (the html), yo!")
+        }
+    })
+};
 
-};   
+managerPrompts()
+    .then(addEmployee)
+    .then(questionsArray => {
+        return generatePage(questionsArray);
+    })
+
+    .then(pageHTML => {
+        return writeToFile(pageHTML);
+    })
+    // .then(writeFileResponse => {
+    //     console.log(writeFileResponse);
+    //     return copyFile();
+    // })
+    // .then(copyFileResponse => {
+    //     console.log(copyFileResponse);
+    // })
+    .catch(err => {
+        console.log(err);
+    })
+   
 
 // or should I do something like this where questions is a const variable established as the array of questions?
-function init(questions) {
-    console.log("Welcome to the Team Profile Generator!\nPlease answer some questions so we can get started.")
-    inquirer.prompt(questions)
+// function init(questions) {
+//     console.log("Welcome to the Team Profile Generator!\nPlease answer some questions so we can get started.")
+//     inquirer.prompt(questions)
     
 
     
-}
+// }
 
