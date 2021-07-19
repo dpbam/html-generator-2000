@@ -205,8 +205,8 @@ const writeToFile = data => {
 
 managerPrompts()
     .then(addEmployee)
-    .then(questionsArray => {
-        return generatePage(questionsArray);
+    .then(answersArray => {
+        return generatePage(answersArray);
     })
 
     .then(pageHTML => {
