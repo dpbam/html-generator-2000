@@ -40,7 +40,7 @@ const managerPrompts = () => {
         {
             type: 'input',
             name: 'email',
-            message: "Enter the manager's email address.",
+            message: "Enter the manager's email address:",
             validate: managerEmail => {
                 if (managerEmail) {
                     return true;
@@ -53,7 +53,7 @@ const managerPrompts = () => {
         {
             type: 'input',
             name: 'officeNumber',
-            message: "Enter the manager's office number.",
+            message: "Enter the manager's office number:",
             validate: officeNumber => {
                 if (officeNumber) {
                     return true;
@@ -121,7 +121,7 @@ const addEmployee = () => {
         {
             type: 'input',
             name: 'email',
-            message: "Enter your employee's email address.",
+            message: "Enter your employee's email address:",
             validate: function (email) {
                 valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
 
