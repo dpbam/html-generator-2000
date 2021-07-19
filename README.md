@@ -20,8 +20,10 @@ Clone the repo from GitHub, download Node.js and inquirer.js module. For testing
 
 ## Usage
 
-Use inquirer from the command line to answer questions. View walk-thru here: https://drive.google.com/file/d/1Zql6FnGU7UMI5iI3eRarGq0yCZfw1RHA/view
-Page screenshot here: <img width="1321" alt="Screen Shot 2021-07-18 at 9 41 11 PM" src="https://user-images.githubusercontent.com/82355287/126099578-6ac12825-a79e-4e4f-b9c4-f4139c015e61.png">
+Use inquirer from the command line to answer questions.
+
+- View walk-thru here: https://drive.google.com/file/d/1Zql6FnGU7UMI5iI3eRarGq0yCZfw1RHA/view
+- Page screenshot here: <img width="1321" alt="Screen Shot 2021-07-18 at 9 41 11 PM" src="https://user-images.githubusercontent.com/82355287/126099578-6ac12825-a79e-4e4f-b9c4-f4139c015e61.png">
 
 ## Contributing
 
